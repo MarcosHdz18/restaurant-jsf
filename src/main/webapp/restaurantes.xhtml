@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+<h:head>
+	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+	<title>Sistema de restaurantes JSF</title>
+</h:head>
+<h:body>
+	<h2>Restaurantes JSF</h2>
+	
+	<h:outputLabel styleClass="titulo" value="¡Bienvenido al sistema de restaurantes JSF"></h:outputLabel>
+	
+	<h:dataTable id="tblRestaurantes" var="restaurante" value="#{restauranteController.restaurantes}" headerClass="headerTable" rowClasses="rowTable rowTableLine">
+		<h:column>
+			<f:facet name="header">Nombre</f:facet>
+			<h:outputLabel value="#{restaurante.nombre}"></h:outputLabel>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Dirección</f:facet>
+			<h:outputLabel value="#{restaurante.direccion}"></h:outputLabel>
+		</h:column>
+		<h:column>
+			<f:facet name="header">País</f:facet>
+			<h:outputLabel value="#{restaurante.pais}"></h:outputLabel>
+		</h:column>
+		<h:column>
+			<f:facet name="header">Gerente</f:facet>
+			<h:outputLabel value="#{restaurante.gerente.nombre} #{restaurante.gerente.apellidoPaterno} #{restaurante.gerente.apellidoMaterno}"></h:outputLabel>
+		</h:column>
+	</h:dataTable>
+	
+</h:body>
+</html>

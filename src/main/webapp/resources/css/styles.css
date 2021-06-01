@@ -1,0 +1,36 @@
+.h1, h2, h3, h4 {
+	text-align: center;
+	color: olive;
+}
+
+.contenedor {
+	width: 1200px;
+}
+
+.titulo {
+	text-align: center;
+	padding: 15px;
+}
+
+.colorText {
+	color: maroon;
+}
+
+.headerTable {
+	text-align: center;
+	background: none repeat scroll 0 0 #E5E5E5;
+	border-bottom: 1px solid #BBBBBB;
+	padding: 16px;
+}
+
+.rowTable {
+	text-align: center;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-top: 1px solid #BBBBBB;
+}
+
+.rowTableLine {
+	text-align: center;
+	background: none repeat scroll 0 0 #F9F9F9;
+	border-top: 1px solid #BBBBBB;
+}
