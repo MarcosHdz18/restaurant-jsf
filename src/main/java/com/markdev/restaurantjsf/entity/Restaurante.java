@@ -35,7 +35,6 @@ public class Restaurante {
 	 * @param gerente
 	 */
 	public Restaurante(String nombre, String direccion, String pais, Gerente gerente) {
-		super();
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.pais = pais;

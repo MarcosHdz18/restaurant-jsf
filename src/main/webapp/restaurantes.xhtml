@@ -1,35 +1,73 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-	
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
-	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+	<!-- <h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Sistema de restaurantes JSF</title>
 </h:head>
 <h:body>
-	<h2>Restaurantes JSF</h2>
-	
-	<h:outputLabel styleClass="titulo" value="¡Bienvenido al sistema de restaurantes JSF"></h:outputLabel>
-	
-	<h:dataTable id="tblRestaurantes" var="restaurante" value="#{restauranteController.restaurantes}" headerClass="headerTable" rowClasses="rowTable rowTableLine">
-		<h:column>
-			<f:facet name="header">Nombre</f:facet>
-			<h:outputLabel value="#{restaurante.nombre}"></h:outputLabel>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Dirección</f:facet>
-			<h:outputLabel value="#{restaurante.direccion}"></h:outputLabel>
-		</h:column>
-		<h:column>
-			<f:facet name="header">País</f:facet>
-			<h:outputLabel value="#{restaurante.pais}"></h:outputLabel>
-		</h:column>
-		<h:column>
-			<f:facet name="header">Gerente</f:facet>
-			<h:outputLabel value="#{restaurante.gerente.nombre} #{restaurante.gerente.apellidoPaterno} #{restaurante.gerente.apellidoMaterno}"></h:outputLabel>
-		</h:column>
-	</h:dataTable>
-	
+	<h2 style="text-align: center;">Restaurantes JSF</h2>
+
+	<p:outputLabel value="¡Bienvenido #{sessionController.usuarioDTO.usuario} al sistema de restaurantes JSF"></p:outputLabel>
+		
+	<h:form>
+		<p:commandButton value="Cerrar Sesión" action="#{sessionClosedController.cerrarSesion}"></p:commandButton>
+		<p:dataTable id="tblRestaurantes" var="restaurante" value="#{restauranteController.restaurantes}" rows="10"
+			paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {Exporters}"
+			currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" reflow="true"
+			rowsPerPageTemplate="5,10,15" draggableColumns="true" emptyMessage="No existen registros" paginatorPosition="bottom"
+			filteredValue="#{restauranteController.restaurantesFiltrados}">
+				
+			<f:facet name="{Exporters}">
+				<div style="float:right;padding-top: 5px;">
+					<h:commandLink>
+						<p:graphicImage name="images/excel.png" width="24"/>
+		                <p:dataExporter type="xls" target="tblRestaurantes" fileName="ReporteRestaurantes" />
+		            </h:commandLink>
+		                 
+		            <h:commandLink>
+		                <p:graphicImage name="images/xlsx.png" width="24"/>
+		                <p:dataExporter type="xlsxstream" target="tblRestaurantes" fileName="ReporteRestaurantes" />
+		            </h:commandLink>
+		 
+		            <h:commandLink>
+		                <p:graphicImage name="images/pdf.png" width="24"/>
+		                <p:dataExporter type="pdf" target="tblRestaurantes" fileName="ReporteRestaurantes"/>
+		            </h:commandLink>
+		 
+		            <h:commandLink>
+		                <p:graphicImage name="images/csv.png" width="24"/>
+		                <p:dataExporter type="csv" target="tblRestaurantes" fileName="ReporteRestaurantes" />
+		            </h:commandLink>
+		 
+		            <h:commandLink>
+		                <p:graphicImage name="images/xml.png" width="24"/>
+		                <p:dataExporter type="xml" target="tblRestaurantes" fileName="ReporteRestaurantes" />
+		            </h:commandLink>
+		                                   
+	            </div>
+	        </f:facet>
+			
+			<p:column headerText="Nombre" style="width: 250px;" filterBy="#{restaurante.nombre}" filterMatchMode="contains" sortBy="#{restaurante.nombre}">
+				<p:outputLabel value="#{restaurante.nombre}"></p:outputLabel>
+			</p:column>
+			<p:column headerText="Dirección" filterBy="#{restaurante.direccion}" filterMatchMode="contains" sortBy="#{restaurante.direccion}">
+				<p:outputLabel value="#{restaurante.direccion}"></p:outputLabel>
+			</p:column>
+			<p:column headerText="País" style="width: 150px;" filterBy="#{restaurante.pais}" filterMatchMode="contains" sortBy="#{restaurante.pais}">
+				<p:outputLabel value="#{restaurante.pais}"></p:outputLabel>
+			</p:column>
+			<p:column headerText="Gerente" filterBy="#{restaurante.gerente.nombre}" filterMatchMode="contains" sortBy="#{restaurante.gerente.nombre}">
+				<p:outputLabel value="#{restaurante.gerente.nombre} #{restaurante.gerente.apellidoPaterno} #{restaurante.gerente.apellidoMaterno}"></p:outputLabel>
+			</p:column>
+			
+		</p:dataTable>
+		
+	</h:form>
+
 </h:body>
 </html>
