@@ -1,26 +1,43 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 	
 <h:head>
-	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+	<!-- <h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Sistema de restaurantes JSF</title>
 </h:head>
 <h:body>
-	<h2>Login JSF</h2>
-	<h:form id="formLogin">
-		<h:panelGrid columns="2">
+	
+	<h2 style="text-align: center;">RESTAURANTE JSF</h2>
+	
+	<div class="ui-fluid">
+		<h:form id="formLogin">
 			
-			<h:outputLabel value="Usuario: "></h:outputLabel>
-			<h:inputText id="campoUsuario" value="#{loginController.usuario}"></h:inputText>
+			<p:growl id="growl"></p:growl>
+			<p:focus context="pnlGridLogin"></p:focus>
 			
-			<h:outputLabel value="Password: "></h:outputLabel>
-			<h:inputSecret id="campoPassword" value="#{loginController.password}"></h:inputSecret>
+			<p:panel id="pnlLogin" header="Inicio de Sesión" style="text-align: center;">
 			
-			<h:commandButton value="Entrar" action="#{loginController.ingresar}"></h:commandButton>
-			
-		</h:panelGrid>
-	</h:form>
+				<p:graphicImage style="float: right; position: absolute; margin-left: 230px;" name="images/user.png" width="15%"></p:graphicImage>
+				
+				<p:panelGrid id="pnlGridLogin" columns="2" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid" style="position: relative; height: 200px; padding-top: 50px">
+					
+					<p:outputLabel value="Usuario: "></p:outputLabel>
+					<p:inputText id="campoUsuario" value="#{loginController.usuario}" placeholder="Escribe el usuario" required="true" requiredMessage="El usuario es requerido"></p:inputText>
+					
+					<p:outputLabel value="Password: "></p:outputLabel>
+					<p:password id="campoPassword" value="#{loginController.password}" placeholder="Escribe el password" required="true" requiredMessage="El password es requerido"></p:password>
+					
+					<p:outputLabel></p:outputLabel>
+					<p:commandButton value="Entrar" action="#{loginController.ingresar}" update="pnlGridLogin, growl"></p:commandButton>
+					
+				</p:panelGrid>
+			</p:panel>
+		</h:form>
+	</div>
+	
 </h:body>
 </html>
